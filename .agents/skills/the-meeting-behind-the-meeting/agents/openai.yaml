@@ -1,0 +1,7 @@
+interface:
+  display_name: "The Meeting Behind the Meeting"
+  short_description: "Evidence-based meeting transcript analysis"
+  default_prompt: "Use $the-meeting-behind-the-meeting to analyze meeting notes for decisions, risks, action items, and follow-up."
+
+policy:
+  allow_implicit_invocation: true

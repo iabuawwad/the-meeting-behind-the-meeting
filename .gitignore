@@ -1,0 +1,40 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Build outputs
+build/
+dist/
+*.egg-info/
+
+# Raw book formats
+*.pdf
+*.epub
+*.azw3
+*.mobi
+
+# Original local source folder; canonical public copies live in resources/book-summaries/
+Books and Resources/
+
+# Logs and local scratch
+*.log
+tmp/
+.tmp/
+
+# Editor files
+.idea/
+.vscode/
+*.swp
