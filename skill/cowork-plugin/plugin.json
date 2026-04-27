@@ -1,7 +1,7 @@
 {
   "name": "the-meeting-behind-the-meeting",
   "display_name": "The Meeting Behind the Meeting",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Evidence-based meeting analysis skill for transcripts, meeting notes, decisions, action items, and risks.",
   "skills": [
     {

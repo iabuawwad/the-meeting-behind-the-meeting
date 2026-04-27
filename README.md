@@ -1,6 +1,26 @@
 # The Meeting Behind the Meeting
 
-Version: `0.2.0`  
+## Simple Installation
+
+Recommended install: download the release asset ZIP from GitHub Releases.
+
+Do not download the GitHub source ZIP for Claude installation. The source ZIP contains multiple package layouts and multiple `SKILL.md` files, so Claude Skill upload can fail. Normal users should use one of these release assets:
+
+- `the-meeting-behind-the-meeting-skill-v0.2.1.zip`
+- `the-meeting-behind-the-meeting-plugin-v0.2.1.zip`
+
+Claude Desktop Skill path:
+
+1. Open Claude Desktop.
+2. Go to Customize -> Skills -> + -> Upload a skill.
+3. Upload `the-meeting-behind-the-meeting-skill-v0.2.1.zip`.
+
+Cowork path:
+
+1. Install the skill ZIP first and use it in Cowork where skills are available.
+2. Or upload `the-meeting-behind-the-meeting-plugin-v0.2.1.zip` from GitHub Releases when Cowork plugin upload is available in your Claude Desktop build.
+
+Version: `0.2.1`  
 Slug: `the-meeting-behind-the-meeting`
 
 The Meeting Behind the Meeting is an Agent Skill for analyzing meeting transcripts, notes, and prep material to surface the practical dynamics that shape a meeting: decision pressure, stakeholder positions, unresolved concerns, alignment gaps, follow-up risks, and what needs to happen before or after the formal agenda.

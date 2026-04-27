@@ -1,302 +1,164 @@
 # Install
 
-This repository packages **The Meeting Behind the Meeting** for Claude Cowork Desktop, Claude Code, ChatGPT Codex Desktop, and Codex CLI.
+Use GitHub Releases ZIP assets for installation.
 
-Product UIs and packaging surfaces can change. Use this guide with the current official product documentation and keep platform claims conservative.
+Do not use Code -> Download ZIP unless you are a developer. The GitHub source ZIP contains several package layouts and multiple `SKILL.md` files. Claude Skill upload expects a skill package with exactly one `SKILL.md`.
 
-## 1. Claude Cowork Desktop
+## 1. Install for normal users
 
-### Requirements
+Download one of these files from GitHub Releases:
 
-- Claude Desktop installed.
-- A paid Claude plan. Anthropic describes Claude Cowork as available on paid plans through Claude Desktop.
-- This repository's Cowork plugin wrapper at `skill/cowork-plugin/`.
+- `the-meeting-behind-the-meeting-skill-v0.2.1.zip`
+- `the-meeting-behind-the-meeting-plugin-v0.2.1.zip`
 
-### Install
+Use the skill ZIP for normal Claude Desktop Skill upload. Use the plugin ZIP only when you specifically need the Claude Cowork plugin package.
+
+## 2. Install As Claude Skill
+
+Use:
+
+```text
+the-meeting-behind-the-meeting-skill-v0.2.1.zip
+```
+
+Install:
 
 1. Open Claude Desktop.
-2. Go to the Cowork tab.
-3. Open Customize.
-4. Browse plugins or upload the custom plugin file from `skill/cowork-plugin/`.
-5. Install the plugin.
-6. Invoke the skill with `/` or the `+` button once installed.
+2. Open Customize.
+3. Open Skills.
+4. Click `+`.
+5. Choose Upload a skill.
+6. Upload `the-meeting-behind-the-meeting-skill-v0.2.1.zip`.
+7. Invoke the skill with `/the-meeting-behind-the-meeting` from Slash commands.
 
-### Notes
-
-- Cowork runs on the desktop and can work with selected local files, folders, and applications that you provide or authorize.
-- Plugin packaging is the supported route for delivering skills in Cowork. This repository's Cowork plugin bundles only the skill: no connectors, no MCP servers, and no elevated permissions.
-
-### Verify
-
-```bash
-python3 -m json.tool skill/cowork-plugin/plugin.json
-grep -R '"connectors": \\[\\]' skill/cowork-plugin/plugin.json
-grep -R '"mcp_servers": \\[\\]' skill/cowork-plugin/plugin.json
-grep -R '"permissions": \\[\\]' skill/cowork-plugin/plugin.json
-```
-
-### Test Prompt
+Expected ZIP structure:
 
 ```text
-/the-meeting-behind-the-meeting Analyze this meeting transcript. Start with the transcript quality gate, then identify decisions, action items, and risks.
+the-meeting-behind-the-meeting/
+├── SKILL.md
+└── resources/
 ```
 
-## 2. Claude Code Desktop
+This ZIP is built so it contains exactly one `SKILL.md`.
 
-### Requirements
+## 3. Install In Claude Cowork
 
-- Claude Desktop installed.
-- Access to the Code tab in Claude Desktop.
-- Project skill files in `.claude/skills/the-meeting-behind-the-meeting/`, or plugin installation through the desktop UI when available in your build.
+Cowork runs in Claude Desktop and can use selected files and installed skills depending on the active desktop build and plan.
 
-### Install
+Normal path:
 
-1. Install and open Claude Desktop.
-2. Open the Code tab.
-3. Open this repository folder as the project.
-4. Use the project skill from `.claude/skills/the-meeting-behind-the-meeting/`.
-5. Or install the packaged skill/plugin from the desktop UI if your Claude Desktop build exposes plugin installation there.
-6. Invoke the skill by typing `/the-meeting-behind-the-meeting`.
+1. Install `the-meeting-behind-the-meeting-skill-v0.2.1.zip` as a Claude Skill.
+2. Open Cowork.
+3. Use the installed skill from the available skill or Slash command controls.
 
-### Notes
+Plugin path:
 
-- Skills can be selected from Slash commands when the Claude Code Desktop surface exposes them.
-- Keep the project copy at `.claude/skills/the-meeting-behind-the-meeting/SKILL.md` aligned with the source skill content.
+1. Download `the-meeting-behind-the-meeting-plugin-v0.2.1.zip` from GitHub Releases.
+2. Open Claude Desktop.
+3. Go to Cowork.
+4. Open Customize.
+5. Upload the plugin ZIP when plugin upload is available.
+6. Invoke the bundled skill with `/the-meeting-behind-the-meeting`.
 
-### Verify
-
-```bash
-test -f .claude/skills/the-meeting-behind-the-meeting/SKILL.md
-grep -R "name: the-meeting-behind-the-meeting" .claude/skills/the-meeting-behind-the-meeting/SKILL.md
-```
-
-### Test Prompt
+Expected plugin ZIP structure:
 
 ```text
-/the-meeting-behind-the-meeting Use the transcript quality gate first. Then produce a one-page intelligence brief from these meeting notes.
+the-meeting-behind-the-meeting/
+├── .claude-plugin/
+│   └── plugin.json
+├── skills/
+│   └── the-meeting-behind-the-meeting/
+│       ├── SKILL.md
+│       └── resources/
+└── README.md
 ```
 
-## 3. Claude Code Terminal
+## 4. Install As Claude Code Project Skill
 
-### Requirements
+Use this path when developing from a cloned source repository.
 
-- Node.js 18 or newer.
-- Claude Code installed from the official package.
-- A Claude.ai, Anthropic Console, or supported enterprise authentication path.
-
-### Install Claude Code
-
-```bash
-npm install -g @anthropic-ai/claude-code
-```
-
-Start Claude Code from the repository folder:
-
-```bash
-claude
-```
-
-### Install The Skill
-
-Personal install:
-
-```text
-~/.claude/skills/the-meeting-behind-the-meeting/SKILL.md
-```
-
-Project install:
+Project skill path:
 
 ```text
 .claude/skills/the-meeting-behind-the-meeting/SKILL.md
 ```
 
-This repository already includes the project install path.
-
-### Invoke
+Invoke:
 
 ```text
 /the-meeting-behind-the-meeting
 ```
 
-### Verify
+Verify:
 
 ```bash
-claude --version
 test -f .claude/skills/the-meeting-behind-the-meeting/SKILL.md
 grep -R "transcript quality gate" .claude/skills/the-meeting-behind-the-meeting/SKILL.md
 ```
 
-### Test Prompt
-
-```text
-/the-meeting-behind-the-meeting Analyze the attached conversation thread. First score transcript quality, then extract decisions, actions, risks, and open questions.
-```
-
-## 4. Claude Code Terminal In Warp
-
-Warp is only the terminal surface. Install and run Claude Code normally.
-
-### Install
+Claude Code Terminal install:
 
 ```bash
 npm install -g @anthropic-ai/claude-code
-```
-
-### Run
-
-1. Open Warp.
-2. Open this repository folder in Warp.
-3. Run:
-
-```bash
 claude
 ```
 
-4. Invoke the skill normally:
+Warp is only a terminal surface. Open Warp in the repository folder, run `claude`, and invoke the skill normally.
 
-```text
-/the-meeting-behind-the-meeting
-```
+## 5. Install For Codex
 
-### Verify
-
-```bash
-pwd
-claude --version
-test -f .claude/skills/the-meeting-behind-the-meeting/SKILL.md
-```
-
-### Test Prompt
-
-```text
-/the-meeting-behind-the-meeting Analyze these voice-note notes. Start with quality and reconstruction confidence before interpreting intent.
-```
-
-## 5. ChatGPT Codex Desktop
-
-### Requirements
-
-- Codex app installed. OpenAI describes the Codex app as available for macOS and Windows.
-- Sign in with a ChatGPT account or workspace that has Codex access.
-- Select this repository as the project folder.
-
-### Install The Skill
-
-Codex project skills should live under:
+Codex project skill path:
 
 ```text
 .agents/skills/the-meeting-behind-the-meeting/
 ```
 
-This repository already includes:
-
-```text
-.agents/skills/the-meeting-behind-the-meeting/SKILL.md
-.agents/skills/the-meeting-behind-the-meeting/agents/openai.yaml
-```
-
-### Invoke
-
-Use either:
+Invoke:
 
 ```text
 $the-meeting-behind-the-meeting
 ```
 
-or the skill picker if available in your Codex Desktop build.
-
-### Verify
-
-```bash
-test -f .agents/skills/the-meeting-behind-the-meeting/SKILL.md
-test -f .agents/skills/the-meeting-behind-the-meeting/agents/openai.yaml
-grep -R "allow_implicit_invocation" .agents/skills/the-meeting-behind-the-meeting/agents/openai.yaml
-```
-
-### Test Prompt
-
-```text
-$the-meeting-behind-the-meeting Analyze this meeting transcript. Run the quality gate first, then produce decisions, action items, risks, and a next-meeting playbook.
-```
-
-## 6. Codex CLI
-
-### Requirements
-
-- Node.js and npm for npm installation, or Homebrew for Homebrew installation.
-- ChatGPT or OpenAI account flow supported by your Codex CLI version.
-
-### Install Codex CLI
-
-NPM:
+Codex CLI install options:
 
 ```bash
 npm install -g @openai/codex
 ```
 
-Homebrew:
+or:
 
 ```bash
 brew install codex
 ```
 
-If Homebrew treats Codex as a cask in your environment, use the current package manager form shown by OpenAI's Codex documentation for your platform.
-
-### Run
+Run:
 
 ```bash
 codex
 ```
 
-### Install The Skill
+## 6. Developer Installation From Source
 
-Project skill:
+Use source installation only if you are editing, testing, or rebuilding the package.
 
-```text
-.agents/skills/the-meeting-behind-the-meeting/
-```
-
-User skill:
-
-```text
-~/.agents/skills/the-meeting-behind-the-meeting/
-```
-
-This repository already includes the project skill path.
-
-### Invoke
-
-```text
-$the-meeting-behind-the-meeting
-```
-
-### Verify
+Clone the repository, then run:
 
 ```bash
-codex --version
-test -f .agents/skills/the-meeting-behind-the-meeting/SKILL.md
-grep -R "name: the-meeting-behind-the-meeting" .agents/skills/the-meeting-behind-the-meeting/SKILL.md
+python -m unittest discover -s tests
+bash scripts/build-release-assets.sh
 ```
 
-### Test Prompt
+Generated release assets are written to `dist/`:
 
 ```text
-$the-meeting-behind-the-meeting Review these meeting minutes. Start with transcript quality, then produce a decision/action table and risk register.
+dist/the-meeting-behind-the-meeting-skill-v0.2.1.zip
+dist/the-meeting-behind-the-meeting-plugin-v0.2.1.zip
 ```
 
-## Repository Validation
-
-After changing installation docs or skill packaging, run:
+Before publishing release assets, confirm:
 
 ```bash
-python3 -m unittest discover -s tests -p "test_*.py"
-python3 -m json.tool skill/cowork-plugin/plugin.json
+unzip -l dist/the-meeting-behind-the-meeting-skill-v0.2.1.zip | grep SKILL.md
+unzip -l dist/the-meeting-behind-the-meeting-plugin-v0.2.1.zip | head -80
+find . -type f \( -name "*.pdf" -o -name "*.epub" -o -name "*.azw3" -o -name "*.mobi" \)
 ```
-
-## Official References
-
-- Anthropic Claude Code setup: `https://docs.anthropic.com/en/docs/claude-code/getting-started`
-- Anthropic Claude Code overview: `https://docs.anthropic.com/en/docs/claude-code/overview`
-- Anthropic Claude Cowork product page: `https://www.anthropic.com/product/claude-cowork`
-- OpenAI Codex with ChatGPT plan: `https://help.openai.com/en/articles/11369540-codex-in-chatgpt`
-- OpenAI Codex CLI getting started: `https://help.openai.com/en/articles/11096431-openai-codex-ci-getting-started`

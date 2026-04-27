@@ -33,12 +33,17 @@ Use this checklist before publishing a release of The Meeting Behind the Meeting
 ## Validation
 
 - Run the repository test suite.
+- Run `scripts/build-release-assets.sh`.
 - Validate package manifests and YAML files.
 - Check all required files are present.
 - Inspect sample outputs for evidence discipline and responsible-use guardrails.
+- Confirm skill ZIP has exactly one `SKILL.md`.
+- Confirm plugin ZIP has `.claude-plugin/plugin.json`.
 
 ## Publishing
 
 - Tag the release with the exact version.
 - Publish only after tests pass.
 - Include release notes that describe user-visible changes.
+- Upload both ZIP files to GitHub Release `v0.2.1`.
+- Confirm source ZIP is marked as developer-only.
