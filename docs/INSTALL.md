@@ -6,21 +6,25 @@ Do not upload the GitHub source ZIP.
 
 Do not use Code -> Download ZIP unless you are a developer. The GitHub source ZIP contains several package layouts and multiple `SKILL.md` files. Claude Skill upload expects a skill package with exactly one `SKILL.md`.
 
+Do not use GitHub Code > Download ZIP for installation.
+
+Use release assets only for normal installation.
+
 ## 1. Install for normal users
 
 Download one of these files from GitHub Releases:
 
-- `the-meeting-behind-the-meeting-skill-v0.2.2.zip`
-- `the-meeting-behind-the-meeting-plugin-v0.2.2.zip`
+- `the-meeting-behind-the-meeting-skill-v0.2.3.zip`
+- `the-meeting-behind-the-meeting-plugin-v0.2.3.zip`
 
-Use the skill ZIP for normal Claude Desktop Skill upload. Use the plugin ZIP only when you specifically need the Claude Cowork plugin package.
+Skill ZIP is recommended for normal users. Plugin ZIP is experimental until validated on Claude Desktop, and should be used only when you specifically need the Claude Cowork plugin package.
 
 ## 2. Install As Claude Skill
 
 Use:
 
 ```text
-the-meeting-behind-the-meeting-skill-v0.2.2.zip
+the-meeting-behind-the-meeting-skill-v0.2.3.zip
 ```
 
 Install:
@@ -30,7 +34,7 @@ Install:
 3. Open Skills.
 4. Click `+`.
 5. Choose Upload a skill.
-6. Upload `the-meeting-behind-the-meeting-skill-v0.2.2.zip`.
+6. Upload `the-meeting-behind-the-meeting-skill-v0.2.3.zip`.
 7. Invoke the skill with `/the-meeting-behind-the-meeting` from Slash commands.
 
 Expected ZIP structure:
@@ -52,13 +56,13 @@ Cowork runs in Claude Desktop and can use selected files and installed skills de
 
 Normal path:
 
-1. Install `the-meeting-behind-the-meeting-skill-v0.2.2.zip` as a Claude Skill.
+1. Install `the-meeting-behind-the-meeting-skill-v0.2.3.zip` as a Claude Skill.
 2. Open Cowork.
 3. Use the installed skill from the available skill or Slash command controls.
 
 Plugin path:
 
-1. Download `the-meeting-behind-the-meeting-plugin-v0.2.2.zip` from GitHub Releases.
+1. Download `the-meeting-behind-the-meeting-plugin-v0.2.3.zip` from GitHub Releases.
 2. Open Claude Desktop.
 3. Go to Cowork.
 4. Open Customize.
@@ -159,14 +163,14 @@ bash scripts/build-release-assets.sh
 Generated release assets are written to `dist/`:
 
 ```text
-dist/the-meeting-behind-the-meeting-skill-v0.2.2.zip
-dist/the-meeting-behind-the-meeting-plugin-v0.2.2.zip
+dist/the-meeting-behind-the-meeting-skill-v0.2.3.zip
+dist/the-meeting-behind-the-meeting-plugin-v0.2.3.zip
 ```
 
 Before publishing release assets, confirm:
 
 ```bash
-unzip -l dist/the-meeting-behind-the-meeting-skill-v0.2.2.zip | grep SKILL.md
-unzip -l dist/the-meeting-behind-the-meeting-plugin-v0.2.2.zip | head -80
+unzip -l dist/the-meeting-behind-the-meeting-skill-v0.2.3.zip | grep SKILL.md
+unzip -l dist/the-meeting-behind-the-meeting-plugin-v0.2.3.zip | head -80
 find . -type f \( -name "*.pdf" -o -name "*.epub" -o -name "*.azw3" -o -name "*.mobi" \)
 ```

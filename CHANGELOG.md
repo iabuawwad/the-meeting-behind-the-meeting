@@ -8,6 +8,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 - No unreleased changes.
 
+## [0.2.3] - 2026-04-27
+
+### Fixed
+
+- Replaced bulk intake questions with guided one-question-at-a-time wizard flow.
+- Made normal invocation sufficient when a transcript is attached or pasted.
+- Simplified Claude Desktop plugin manifest for better validation.
+- Removed unsupported frontmatter fields from Desktop-facing SKILL.md files.
+
+### Changed
+
+- Skill now shows progress during intake using Question X of Y.
+- Skill provides numbered choices and recommended defaults.
+
 ## [0.2.2] - 2026-04-27
 
 ### Fixed

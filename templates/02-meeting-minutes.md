@@ -8,6 +8,19 @@
 - Conversation Integrity: `[Pass | Concern | Fail]`
 - Proceed Level: `[Full analysis | Proceed with caution | Limited analysis only | Stop and clean transcript first]`
 
+## Wizard Scope Summary
+
+- Transcript type:
+- Context:
+- User identity:
+- Objective:
+- Output audience:
+- Output type:
+- Participant notes:
+- Date/time:
+- Confidence:
+- User confirmed: Yes / No
+
 ## Meeting Details
 
 - Title:

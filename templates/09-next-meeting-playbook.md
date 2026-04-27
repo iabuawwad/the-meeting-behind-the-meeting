@@ -8,6 +8,19 @@
 - Conversation Integrity: `[Pass | Concern | Fail]`
 - Proceed Level: `[Full analysis | Proceed with caution | Limited analysis only | Stop and clean transcript first]`
 
+## Wizard Scope Summary
+
+- Transcript type:
+- Context:
+- User identity:
+- Objective:
+- Output audience:
+- Output type:
+- Participant notes:
+- Date/time:
+- Confidence:
+- User confirmed: Yes / No
+
 ## Opening Line
 
 `I want to confirm what we agreed, what remains open, and what we need to decide today. If my read is wrong, let us correct it first.`

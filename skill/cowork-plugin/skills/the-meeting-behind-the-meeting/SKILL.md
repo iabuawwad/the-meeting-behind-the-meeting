@@ -1,15 +1,15 @@
 ---
 name: the-meeting-behind-the-meeting
-description: Use for transcript, meeting notes, conversation thread, interview, voice note, minutes, action items, decisions, and risks that need evidence-based meeting intelligence.
+description: Analyze meeting transcripts, conversation threads, interviews, and voice notes using transcript reliability scoring, structured notes, decisions, risks, communication signals, and next-step strategy.
 ---
 
 # The Meeting Behind the Meeting
 
 Use this skill for transcript, meeting notes, conversation thread, interview, voice note, minutes, action items, decisions, and risks.
 
-Default mode is Interactive Deep Mode. Run the transcript quality gate first and keep every advanced claim evidence-based.
+Normal invocation should be enough. If the user invokes `/the-meeting-behind-the-meeting` and attaches or pastes a transcript, run the Transcript Quality and Reliability Gate first, then start the Guided Intake Wizard, then wait for user answers unless autonomous mode is requested. The user should not need to provide a long instruction prompt.
 
-Do not proceed directly into full analysis unless the user explicitly requests autonomous mode, says proceed with defaults, or says do not ask questions. Otherwise, after reading the transcript, produce the Transcript Quality and Reliability Gate, ask the Intake Questions, then stop and wait for answers.
+Default mode is Interactive Deep Mode. Run the transcript quality gate as the first reliability step. Keep model routing guidance in this body and in `docs/MODEL_ROUTING.md`, not in YAML frontmatter.
 
 # Transcript Quality and Reliability Gate
 
@@ -25,35 +25,102 @@ Required fields:
 - Recommended Handling
 - Proceed Level: Full analysis / Proceed with caution / Limited analysis only / Stop and clean transcript first
 
-# Intake Questions
+# Guided Intake Wizard
 
-Unless the user requested autonomous mode, ask:
+Ask one question at a time. Show progress as `Question X of Y`. Provide numbered choices, allow free-text answers, show a recommended default when confidence is sufficient, and accept `default`, `skip`, or `proceed with defaults`.
 
-1. Is this a formal meeting, informal conversation, voice note, interview, or mixed thread?
-2. Is it internal, external, or mixed?
-3. Who are you in the transcript?
-4. What is your objective: official minutes, private intelligence, follow-up strategy, personal communication review, or full forensic analysis?
-5. Should participant context notes/profiles be created or updated?
-6. Is the date/time known, should it be entered manually, or should it be skipped?
-7. Who is the output for: personal use, management, legal/compliance, client/vendor, team, or public record?
-8. Should the skill produce public record only, private intelligence notes only, or both?
+After the final question, show a short Wizard Scope Summary and ask for confirmation before full analysis.
 
-Then stop and wait for user answers.
+Question 1 of 8: Transcript type
+1. Formal meeting
+2. Informal conversation
+3. Voice note
+4. Interview
+5. Mixed thread / multiple conversations
+6. Not sure, infer from transcript
+Recommended: [based on transcript]
 
-## Autonomous Mode Defaults
+Question 2 of 8: Context
+1. Internal
+2. External
+3. Mixed
+4. Personal
+5. Legal / advisory
+6. Not sure, infer from transcript
+Recommended: [based on transcript]
 
-Use these only when autonomous mode, proceed with defaults, or no-questions mode is explicit:
+Question 3 of 8: User identity
+1. I am Speaker 1
+2. I am Speaker 2
+3. I am Speaker 3
+4. I am not in the transcript
+5. Use the name I provide
+6. Not sure, infer from transcript
+Recommended: [based on transcript]
+
+Question 4 of 8: Main objective
+1. Official meeting minutes
+2. Private intelligence notes
+3. Follow-up strategy
+4. Negotiation / decision playbook
+5. Personal communication review
+6. Full forensic analysis
+7. All of the above
+Recommended: Full forensic analysis when the transcript involves important decisions, legal, HR, vendor, management, or sensitive matters.
+
+Question 5 of 8: Output audience
+1. Personal use only
+2. Team use
+3. Management update
+4. Legal / compliance
+5. Client / vendor
+6. Public or shareable record
+Recommended: Personal use only unless user says otherwise.
+
+Question 6 of 8: Output type
+1. Public record only
+2. Private intelligence notes only
+3. Both public record and private intelligence notes
+Recommended: Both.
+
+Question 7 of 8: Participant context notes
+1. Create participant context notes
+2. Update existing participant context notes if available
+3. Create profile update blocks only
+4. Skip participant notes
+Recommended: Create profile update blocks in Claude Desktop/Cowork because file-write access may be unavailable.
+
+Question 8 of 8: Date and time
+1. Extract from transcript
+2. I will enter manually
+3. Mark as unknown
+4. Skip date/time
+Recommended: Extract if present, otherwise mark unknown.
+
+## Conditional Follow-Up Questions
+
+Ask only if needed:
+
+- If the transcript appears incomplete: "The transcript appears to end mid-sentence. Do you have a continuation?"
+- If multiple conversations are detected: ask whether to split and analyze separately.
+- If speaker identity is unclear: ask the user to map speakers.
+- If legal/compliance output is requested: ask whether analysis should be fact-only or include private strategy notes.
+
+## Autonomous Mode
+
+If the user says `autonomous mode`, `proceed with defaults`, `do not ask questions`, or `run full analysis now`, skip the wizard and use:
 
 - Mode: Deep
-- Output audience: Personal use
-- Output type: Both public record and private intelligence notes
-- Date/time: Extract if present, otherwise mark unknown
-- Profiles: Generate participant context notes but do not claim file persistence unless file-write access exists
-- Sentiment: Use confidence rating and evidence discipline
+- Context: inferred
+- User identity: inferred if possible, otherwise unknown
+- Output audience: personal use
+- Output type: both public record and private intelligence notes
+- Participant context: profile update blocks only
+- Date/time: extract if present, otherwise unknown
 
 ## Full Layer Stack
 
-After intake, run these layers in order:
+After confirmed intake or autonomous defaults, run these layers in order:
 
 0. Transcript Quality and Reliability Gate
 1. Intake and Scope Confirmation

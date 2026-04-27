@@ -4,6 +4,25 @@ The Meeting Behind the Meeting analyzes transcripts, meeting notes, conversation
 
 Every run starts with the transcript quality gate. Output depth depends on transcript quality, reconstruction confidence, sentiment/tone confidence, and conversation integrity.
 
+## Quick Start
+
+```text
+/the-meeting-behind-the-meeting
+Attach or paste transcript.
+```
+
+Normal invocation is enough. The skill should first score transcript reliability, then start the Guided Intake Wizard.
+
+## Guided Intake Wizard
+
+The Guided Intake Wizard asks one question at a time, shows progress as `Question X of Y`, provides numbered choices, and recommends a default when the transcript supports one.
+
+You can answer by number, type a free-text answer, type `skip`, or type `default`.
+
+Type `proceed with defaults` when you want the skill to accept recommended defaults for the remaining wizard questions.
+
+After the final question, the skill shows a short Wizard Scope Summary and asks for confirmation before full analysis.
+
 ## Interactive Mode
 
 Interactive Mode is the default. The skill first produces the Transcript Quality and Reliability Gate, then asks intake questions before deep analysis.
@@ -27,6 +46,16 @@ Example prompt:
 Analyze this transcript in autonomous mode.
 ```
 
+You can also request autonomous mode with:
+
+```text
+proceed with defaults
+```
+
+```text
+run full analysis now
+```
+
 Default autonomous settings:
 
 - Mode: Deep.
@@ -36,9 +65,11 @@ Default autonomous settings:
 - Profiles: Generate participant context notes, but do not claim saved files unless file-write access exists.
 - Sentiment: Use numeric confidence and evidence discipline.
 
-## How To Force Full Forensic Analysis
+## How To Request Full Forensic Mode
 
 Ask directly for full forensic analysis when the source may be mixed, disputed, contradictory, incomplete, or politically sensitive.
+
+Use full forensic mode when you want segmentation, contradictions, missing context, risk, accountability, people dynamics, and next-meeting strategy reviewed together.
 
 Example prompt:
 

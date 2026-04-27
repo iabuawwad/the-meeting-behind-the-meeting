@@ -47,5 +47,5 @@ Use this checklist before publishing a release of The Meeting Behind the Meeting
 - Tag the release with the exact version.
 - Publish only after tests pass.
 - Include release notes that describe user-visible changes.
-- Upload both ZIP files to GitHub Release `v0.2.2`.
+- Upload both ZIP files to GitHub Release `v0.2.3`.
 - Confirm source ZIP is marked as developer-only.

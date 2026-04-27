@@ -2,7 +2,6 @@
 set -euo pipefail
 
 NAME="the-meeting-behind-the-meeting"
-DISPLAY_NAME="The Meeting Behind the Meeting"
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 VERSION="$(tr -d '[:space:]' < "$ROOT_DIR/VERSION")"
 SOURCE_DIR="$ROOT_DIR/.claude/skills/$NAME"
@@ -24,18 +23,11 @@ mkdir -p "$PLUGIN_ROOT/.claude-plugin" "$PLUGIN_SKILL_DIR" "$DIST_DIR"
 cat > "$PLUGIN_ROOT/.claude-plugin/plugin.json" <<JSON
 {
   "name": "$NAME",
-  "display_name": "$DISPLAY_NAME",
   "version": "$VERSION",
-  "description": "Evidence-based meeting analysis skill for transcripts, meeting notes, decisions, action items, and risks.",
-  "skills": [
-    {
-      "name": "$NAME",
-      "path": "skills/$NAME/SKILL.md"
-    }
-  ],
-  "connectors": [],
-  "mcp_servers": [],
-  "permissions": []
+  "description": "A multi-layer transcript intelligence skill for meetings, conversations, interviews, and voice notes.",
+  "author": {
+    "name": "Abe"
+  }
 }
 JSON
 
@@ -46,11 +38,11 @@ cp -R "$ROOT_DIR/references" "$PLUGIN_SKILL_DIR/references"
 cp -R "$ROOT_DIR/resources" "$PLUGIN_SKILL_DIR/resources"
 
 cat > "$PLUGIN_ROOT/README.md" <<README
-# $DISPLAY_NAME
+# The Meeting Behind the Meeting
 
-Claude Cowork plugin package for $DISPLAY_NAME.
+Claude Desktop plugin package for The Meeting Behind the Meeting.
 
-This plugin bundles only the skill. It does not include connectors, MCP servers, or elevated permissions.
+This plugin bundles only the skill. It does not include commands, agents, hooks, MCP servers, connectors, or elevated permissions.
 README
 
 (cd "$BUILD_ROOT" && zip -qr "$ZIP_PATH" "$NAME")
