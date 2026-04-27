@@ -26,6 +26,13 @@ if [ "$skill_count" != "1" ]; then
   exit 1
 fi
 
+for folder in frameworks templates references resources; do
+  if ! unzip -Z1 "$SKILL_ZIP" | awk -v prefix="$NAME/$folder/" 'index($0, prefix) == 1 { found = 1 } END { exit found ? 0 : 1 }'; then
+    echo "Skill ZIP is missing $folder/" >&2
+    exit 1
+  fi
+done
+
 if ! zip_contains "$PLUGIN_ZIP" "$NAME/.claude-plugin/plugin.json"; then
   echo "Plugin ZIP is missing .claude-plugin/plugin.json" >&2
   exit 1
@@ -35,6 +42,13 @@ if ! zip_contains "$PLUGIN_ZIP" "$NAME/skills/$NAME/SKILL.md"; then
   echo "Plugin ZIP is missing skills/$NAME/SKILL.md" >&2
   exit 1
 fi
+
+for folder in frameworks templates references resources; do
+  if ! unzip -Z1 "$PLUGIN_ZIP" | awk -v prefix="$NAME/skills/$NAME/$folder/" 'index($0, prefix) == 1 { found = 1 } END { exit found ? 0 : 1 }'; then
+    echo "Plugin ZIP is missing skills/$NAME/$folder/" >&2
+    exit 1
+  fi
+done
 
 echo "Skill ZIP: $SKILL_ZIP"
 echo "Plugin ZIP: $PLUGIN_ZIP"

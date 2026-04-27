@@ -8,6 +8,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 - No unreleased changes.
 
+## [0.2.2] - 2026-04-27
+
+### Fixed
+
+- Corrected release ZIP packaging so all framework, template, reference, and resource files are included.
+- Enforced interactive intake behaviour before deep analysis.
+- Added mandatory numeric transcript quality, reconstruction, and sentiment confidence scoring.
+- Clarified participant context/profile workflow for Claude Desktop, Cowork, Claude Code, and Codex.
+
+### Changed
+
+- Default runtime mode is now Interactive Deep Mode.
+- Autonomous mode must be explicitly requested.
+
 ## [0.2.1] - 2026-04-27
 
 ### Fixed

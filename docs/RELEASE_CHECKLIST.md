@@ -38,12 +38,14 @@ Use this checklist before publishing a release of The Meeting Behind the Meeting
 - Check all required files are present.
 - Inspect sample outputs for evidence discipline and responsible-use guardrails.
 - Confirm skill ZIP has exactly one `SKILL.md`.
+- Confirm skill ZIP includes `frameworks/`, `templates/`, `references/`, and `resources/`.
 - Confirm plugin ZIP has `.claude-plugin/plugin.json`.
+- Confirm plugin ZIP skill folder includes `frameworks/`, `templates/`, `references/`, and `resources/`.
 
 ## Publishing
 
 - Tag the release with the exact version.
 - Publish only after tests pass.
 - Include release notes that describe user-visible changes.
-- Upload both ZIP files to GitHub Release `v0.2.1`.
+- Upload both ZIP files to GitHub Release `v0.2.2`.
 - Confirm source ZIP is marked as developer-only.

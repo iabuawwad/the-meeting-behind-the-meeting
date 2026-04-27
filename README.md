@@ -6,21 +6,21 @@ Recommended install: download the release asset ZIP from GitHub Releases.
 
 Do not download the GitHub source ZIP for Claude installation. The source ZIP contains multiple package layouts and multiple `SKILL.md` files, so Claude Skill upload can fail. Normal users should use one of these release assets:
 
-- `the-meeting-behind-the-meeting-skill-v0.2.1.zip`
-- `the-meeting-behind-the-meeting-plugin-v0.2.1.zip`
+- `the-meeting-behind-the-meeting-skill-v0.2.2.zip`
+- `the-meeting-behind-the-meeting-plugin-v0.2.2.zip`
 
 Claude Desktop Skill path:
 
 1. Open Claude Desktop.
 2. Go to Customize -> Skills -> + -> Upload a skill.
-3. Upload `the-meeting-behind-the-meeting-skill-v0.2.1.zip`.
+3. Upload `the-meeting-behind-the-meeting-skill-v0.2.2.zip`.
 
 Cowork path:
 
 1. Install the skill ZIP first and use it in Cowork where skills are available.
-2. Or upload `the-meeting-behind-the-meeting-plugin-v0.2.1.zip` from GitHub Releases when Cowork plugin upload is available in your Claude Desktop build.
+2. Or upload `the-meeting-behind-the-meeting-plugin-v0.2.2.zip` from GitHub Releases when Cowork plugin upload is available in your Claude Desktop build.
 
-Version: `0.2.1`  
+Version: `0.2.2`  
 Slug: `the-meeting-behind-the-meeting`
 
 The Meeting Behind the Meeting is an Agent Skill for analyzing meeting transcripts, notes, and prep material to surface the practical dynamics that shape a meeting: decision pressure, stakeholder positions, unresolved concerns, alignment gaps, follow-up risks, and what needs to happen before or after the formal agenda.
@@ -42,6 +42,12 @@ This skill helps an agent:
 Transcript quality controls the reliability of every downstream conclusion. Poor diarization, missing context, unclear speakers, fragmented audio, or incomplete notes can make ordinary disagreement look like misalignment or make a key commitment disappear.
 
 For that reason, the skill starts with a transcript quality gate. If the input is weak, the agent must lower confidence, ask for clarification, or limit the analysis to observable facts. Interpretation should never outrun the evidence.
+
+## Why the skill asks questions first
+
+The skill is designed to avoid shallow or overconfident analysis. It first rates transcript reliability with numeric scores for transcript quality, reconstruction confidence, and sentiment/tone confidence.
+
+Unless autonomous mode is requested, it asks intake questions before deep analysis. That improves accuracy, profile handling, output relevance, and the separation between public record material and private intelligence notes.
 
 ## Core Outputs
 

@@ -4,6 +4,76 @@ The Meeting Behind the Meeting analyzes transcripts, meeting notes, conversation
 
 Every run starts with the transcript quality gate. Output depth depends on transcript quality, reconstruction confidence, sentiment/tone confidence, and conversation integrity.
 
+## Interactive Mode
+
+Interactive Mode is the default. The skill first produces the Transcript Quality and Reliability Gate, then asks intake questions before deep analysis.
+
+Use Interactive Mode when:
+
+- You want the output tailored to a specific audience.
+- The transcript may contain mixed conversations or missing context.
+- Participant context notes may need to be created or updated.
+- You need a clear split between public record and private intelligence notes.
+
+After the intake questions, answer briefly or say `proceed with defaults`.
+
+## Autonomous Mode
+
+Use Autonomous Mode only when you want the skill to continue without waiting for intake answers.
+
+Example prompt:
+
+```text
+Analyze this transcript in autonomous mode.
+```
+
+Default autonomous settings:
+
+- Mode: Deep.
+- Output audience: Personal use.
+- Output type: Both public record and private intelligence notes.
+- Date/time: Extract if present, otherwise mark unknown.
+- Profiles: Generate participant context notes, but do not claim saved files unless file-write access exists.
+- Sentiment: Use numeric confidence and evidence discipline.
+
+## How To Force Full Forensic Analysis
+
+Ask directly for full forensic analysis when the source may be mixed, disputed, contradictory, incomplete, or politically sensitive.
+
+Example prompt:
+
+```text
+Run full forensic analysis on this mixed thread. Segment it first and do not merge unrelated conversations.
+```
+
+Forensic analysis still starts with the quality gate. If the source is too weak, the skill must limit analysis or stop and request cleaner input.
+
+## How To Request Profile Updates
+
+Ask for profile updates when you want participant context notes maintained from the transcript.
+
+Example prompt:
+
+```text
+Create or update participant context notes for each named participant. Separate evidence from interpretation.
+```
+
+In Claude Desktop or Cowork, the skill may only be able to generate Participant Context Notes and Profile Update Blocks for manual saving. In Claude Code or Codex with file access, it may create or update files under `profiles/`, `outputs/`, `meetings/`, `conversations/`, or `voice-notes/` when requested.
+
+## How To Request Public Record Vs Private Intelligence Notes
+
+Use public record when the output may be shared with participants, management, clients, vendors, legal/compliance, or a team. Use private intelligence notes when the output is for personal preparation and should keep hypotheses, risks, and strategy separate from the official record.
+
+Example prompts:
+
+```text
+Produce public record only.
+```
+
+```text
+Produce both public record and private intelligence notes.
+```
+
 ## Book Summary Reference Guides
 
 The skill includes user-created book summary reference guides in `resources/book-summaries/`.

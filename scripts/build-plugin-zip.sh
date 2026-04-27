@@ -40,7 +40,10 @@ cat > "$PLUGIN_ROOT/.claude-plugin/plugin.json" <<JSON
 JSON
 
 cp "$SOURCE_DIR/SKILL.md" "$PLUGIN_SKILL_DIR/SKILL.md"
-cp -R "$SOURCE_DIR/resources" "$PLUGIN_SKILL_DIR/resources"
+cp -R "$ROOT_DIR/frameworks" "$PLUGIN_SKILL_DIR/frameworks"
+cp -R "$ROOT_DIR/templates" "$PLUGIN_SKILL_DIR/templates"
+cp -R "$ROOT_DIR/references" "$PLUGIN_SKILL_DIR/references"
+cp -R "$ROOT_DIR/resources" "$PLUGIN_SKILL_DIR/resources"
 
 cat > "$PLUGIN_ROOT/README.md" <<README
 # $DISPLAY_NAME
@@ -61,5 +64,12 @@ if ! zip_contains "$ZIP_PATH" "$NAME/skills/$NAME/SKILL.md"; then
   echo "Plugin ZIP is missing skills/$NAME/SKILL.md" >&2
   exit 1
 fi
+
+for folder in frameworks templates references resources; do
+  if ! unzip -Z1 "$ZIP_PATH" | awk -v prefix="$NAME/skills/$NAME/$folder/" 'index($0, prefix) == 1 { found = 1 } END { exit found ? 0 : 1 }'; then
+    echo "Plugin ZIP is missing skills/$NAME/$folder/" >&2
+    exit 1
+  fi
+done
 
 echo "$ZIP_PATH"

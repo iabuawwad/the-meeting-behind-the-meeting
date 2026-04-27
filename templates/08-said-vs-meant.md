@@ -6,6 +6,7 @@
 - Reconstruction Confidence: `[score]/100`
 - Sentiment/Tone Confidence: `[score]/100`
 - Conversation Integrity: `[Pass | Concern | Fail]`
+- Proceed Level: `[Full analysis | Proceed with caution | Limited analysis only | Stop and clean transcript first]`
 
 ## Analysis Rules
 

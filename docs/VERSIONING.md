@@ -2,7 +2,7 @@
 
 The Meeting Behind the Meeting uses semantic versioning: `MAJOR.MINOR.PATCH`.
 
-The current version is `0.2.1`.
+The current version is `0.2.2`.
 
 ## MAJOR
 
